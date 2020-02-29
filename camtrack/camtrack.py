@@ -31,6 +31,7 @@ def _track_all(corner_storage, mats, real_points, intrinsic_mat, tr_params, min_
     while recalc:
         recalc = False
         for i in range(len(corner_storage)):
+            print(f'On frame {i}.')
             frame_corners = corner_storage[i]
             if mats[i] is None:
                 idx = frame_corners.ids.squeeze()
@@ -46,6 +47,7 @@ def _track_all(corner_storage, mats, real_points, intrinsic_mat, tr_params, min_
                         filter_outliers = np.setdiff1d(idx,
                                                        np.intersect1d(inliers.squeeze(), idx))
                         real_points[filter_outliers] = None
+                        print(f'Filtered {len(filter_outliers)} points.')
                 if mats[i] is not None:
                     recalc = True
                     for j in range(len(corner_storage)):
@@ -55,6 +57,8 @@ def _track_all(corner_storage, mats, real_points, intrinsic_mat, tr_params, min_
                             points, idx, _ = triangulate_correspondences(corrs, mats[i],
                                                                          mats[j],
                                                                          intrinsic_mat, tr_params)
+                            print(
+                                f'Triangulated points: {len(points)}. Current PC size: {len(list(filter(lambda x: x is not None, real_points)))}.')
                             for id, point in zip(idx, points):
                                 if real_points[id] is None:
                                     real_points[id] = point
@@ -94,7 +98,11 @@ def track_and_calc_colors(camera_parameters: CameraParameters,
         if real_points[id] is None:
             real_points[id] = point
 
+    print(f'Processed first two frames. Found 3d points: {len(points)}.')
+
     mats, real_points = _track_all(corner_storage, mats, real_points, intrinsic_mat, tr_params)
+
+    print(f'Finished tracking.')
 
     view_mats = mats
     real_points = list(filter(lambda x: x is not None, real_points))
@@ -111,6 +119,7 @@ def track_and_calc_colors(camera_parameters: CameraParameters,
     )
     point_cloud = point_cloud_builder.build_point_cloud()
     poses = list(map(view_mat3x4_to_pose, view_mats))
+    print(f'Built point cloud and poses. PC size:{len(point_cloud_ids)}.')
     return poses, point_cloud
 
 
