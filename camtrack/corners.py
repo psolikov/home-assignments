@@ -57,9 +57,9 @@ def _build_impl(frame_sequence: pims.FramesSequence,
 
     FILTER_THRESH = 10
 
-    CV_GFTT_MAX_CORNERS = 500
-    CV_GFTT_QUALITY_LVL = 0.001
-    CV_GFTT_MIN_DIST = 10
+    CV_GFTT_MAX_CORNERS = 700
+    CV_GFTT_QUALITY_LVL = 0.0001
+    CV_GFTT_MIN_DIST = 11
     CV_GFTT_CORNERS = None
     CV_GFTT_MASK = None
     CV_GFTT_BSIZE = 10

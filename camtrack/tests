@@ -1,0 +1,53 @@
+p3 camtrack.py "../dataset/ironman_translation_fast/rgb/*" "../dataset/ironman_translation_fast/camera.yml" track_iron.yml point_cloud.yml &&
+p3 cmptrack.py "../dataset/ironman_translation_fast/ground_truth.yml" track_iron.yml
+m r <= 10
+m p <= 0.15
+max r <= 20
+max p <= 0.3
++
+
+p3 camtrack.py "../dataset/bike_translation_slow/rgb/*" "../dataset/bike_translation_slow/camera.yml" track_bike.yml point_cloud.yml &&
+p3 cmptrack.py "../dataset/bike_translation_slow/ground_truth.yml" track_bike.yml
+m r <= 2
+m p <= 0.1
++
+
+p3 camtrack.py "../dataset/fox_head_short/rgb.mov" "../dataset/fox_head_short/camera.yml" track_fxs.yml point_cloud.yml &&
+p3 cmptrack.py "../dataset/fox_head_short/ground_truth.yml" track_fxs.yml
+m r <= 10
+m p <= 0.15
+max r <= 20
+max p <= 0.3
++
+
+p3 camtrack.py "../dataset/room/rgb.mov" "../dataset/room/camera.yml" track_room.yml point_cloud.yml &&
+p3 cmptrack.py "../dataset/room/ground_truth.yml" track_room.yml
+m r <= 10
+m p <= 0.15
+max r <= 20
+max p <= 0.3
++
+
+p3 camtrack.py "../dataset/soda_free_motion/rgb/*" "../dataset/soda_free_motion/camera.yml" track_soda.yml point_cloud.yml &&
+p3 cmptrack.py "../dataset/soda_free_motion/ground_truth.yml" track_soda.yml
+m r <= 10
+m p <= 0.15
+max r <= 20
+max p <= 0.3
+-
+
+p3 camtrack.py "../dataset/house_free_motion/rgb/*/" "../dataset/house_free_motion/camera.yml" track_house.yml point_cloud.yml &&
+p3 cmptrack.py "../dataset/house_free_motion/ground_truth.yml" track_house.yml
+m r <= 10
+m p <= 0.15
+max r <= 20
+max p <= 0.3
+-
+
+p3 camtrack.py "../dataset/fox_head_full/rgb.mov" "../dataset/fox_head_full/camera.yml" track_fxf.yml point_cloud.yml &&
+p3 cmptrack.py "../dataset/fox_head_full/ground_truth.yml" track_fxf.yml
+m r <= 10
+m p <= 0.15
+max r <= 20
+max p <= 0.3
+-
